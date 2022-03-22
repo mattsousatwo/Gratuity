@@ -13,8 +13,10 @@ struct GratuityApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationView {
+                CalculationView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)      
+            }
         }
     }
 }

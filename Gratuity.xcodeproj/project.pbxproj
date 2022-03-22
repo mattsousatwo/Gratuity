@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6027D51827E0FC8100273B7D /* EXT+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027D51727E0FC8100273B7D /* EXT+View.swift */; };
+		6027D51A27E2684B00273B7D /* IncrementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027D51927E2684B00273B7D /* IncrementButton.swift */; };
+		603A69CE27D7E8ED004D30C9 /* TipPercentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603A69CD27D7E8ED004D30C9 /* TipPercentage.swift */; };
+		603A69D027D7EAEB004D30C9 /* TipButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603A69CF27D7EAEB004D30C9 /* TipButtonModel.swift */; };
+		605BCF4827DEFAC400311B68 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605BCF4727DEFAC400311B68 /* SettingsView.swift */; };
 		607EE61327D70C5F006B4428 /* GratuityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE61227D70C5F006B4428 /* GratuityApp.swift */; };
-		607EE61527D70C5F006B4428 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE61427D70C5F006B4428 /* ContentView.swift */; };
 		607EE61727D70C62006B4428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607EE61627D70C62006B4428 /* Assets.xcassets */; };
 		607EE61A27D70C62006B4428 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607EE61927D70C62006B4428 /* Preview Assets.xcassets */; };
 		607EE61C27D70C62006B4428 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE61B27D70C62006B4428 /* Persistence.swift */; };
@@ -16,6 +20,18 @@
 		607EE62927D70C62006B4428 /* GratuityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE62827D70C62006B4428 /* GratuityTests.swift */; };
 		607EE63327D70C62006B4428 /* GratuityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE63227D70C62006B4428 /* GratuityUITests.swift */; };
 		607EE63527D70C62006B4428 /* GratuityUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE63427D70C62006B4428 /* GratuityUITestsLaunchTests.swift */; };
+		607EE64227D70CBF006B4428 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE64127D70CBF006B4428 /* CalculationView.swift */; };
+		607EE64427D70DF2006B4428 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE64327D70DF2006B4428 /* CalculationViewModel.swift */; };
+		607EE64927D71072006B4428 /* GratuityFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE64827D71072006B4428 /* GratuityFactor.swift */; };
+		607EE64B27D715D5006B4428 /* TipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE64A27D715D5006B4428 /* TipButton.swift */; };
+		60819EF227DFDB9500AEF5C1 /* ColorSchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60819EF127DFDB9500AEF5C1 /* ColorSchemePicker.swift */; };
+		60819EF427DFDD1100AEF5C1 /* ColorElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60819EF327DFDD1100AEF5C1 /* ColorElement.swift */; };
+		60819EF627E043C900AEF5C1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60819EF527E043C900AEF5C1 /* Settings.swift */; };
+		60B4369C27DFCB3C009540A6 /* KeyboardAvoidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4369B27DFCB3C009540A6 /* KeyboardAvoidance.swift */; };
+		60B4369E27DFCDDC009540A6 /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4369D27DFCDDC009540A6 /* KeyboardAdaptive.swift */; };
+		60B436A027DFCEC2009540A6 /* EXT+UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4369F27DFCEC2009540A6 /* EXT+UIResponder.swift */; };
+		60C16C0027E3B4980097A007 /* TipPercentagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C16BFF27E3B4980097A007 /* TipPercentagePicker.swift */; };
+		60C16C0227E3BEB50097A007 /* UpdateTipPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C16C0127E3BEB50097A007 /* UpdateTipPercentageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,9 +52,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6027D51727E0FC8100273B7D /* EXT+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EXT+View.swift"; sourceTree = "<group>"; };
+		6027D51927E2684B00273B7D /* IncrementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementButton.swift; sourceTree = "<group>"; };
+		603A69CD27D7E8ED004D30C9 /* TipPercentage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPercentage.swift; sourceTree = "<group>"; };
+		603A69CF27D7EAEB004D30C9 /* TipButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipButtonModel.swift; sourceTree = "<group>"; };
+		605BCF4727DEFAC400311B68 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		607EE60F27D70C5F006B4428 /* Gratuity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gratuity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607EE61227D70C5F006B4428 /* GratuityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuityApp.swift; sourceTree = "<group>"; };
-		607EE61427D70C5F006B4428 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		607EE61627D70C62006B4428 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		607EE61927D70C62006B4428 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		607EE61B27D70C62006B4428 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -48,6 +68,18 @@
 		607EE62E27D70C62006B4428 /* GratuityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GratuityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607EE63227D70C62006B4428 /* GratuityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuityUITests.swift; sourceTree = "<group>"; };
 		607EE63427D70C62006B4428 /* GratuityUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuityUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		607EE64127D70CBF006B4428 /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
+		607EE64327D70DF2006B4428 /* CalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewModel.swift; sourceTree = "<group>"; };
+		607EE64827D71072006B4428 /* GratuityFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GratuityFactor.swift; sourceTree = "<group>"; };
+		607EE64A27D715D5006B4428 /* TipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipButton.swift; sourceTree = "<group>"; };
+		60819EF127DFDB9500AEF5C1 /* ColorSchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemePicker.swift; sourceTree = "<group>"; };
+		60819EF327DFDD1100AEF5C1 /* ColorElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorElement.swift; sourceTree = "<group>"; };
+		60819EF527E043C900AEF5C1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		60B4369B27DFCB3C009540A6 /* KeyboardAvoidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoidance.swift; sourceTree = "<group>"; };
+		60B4369D27DFCDDC009540A6 /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
+		60B4369F27DFCEC2009540A6 /* EXT+UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EXT+UIResponder.swift"; sourceTree = "<group>"; };
+		60C16BFF27E3B4980097A007 /* TipPercentagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipPercentagePicker.swift; sourceTree = "<group>"; };
+		60C16C0127E3BEB50097A007 /* UpdateTipPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTipPercentageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +107,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		603A69C827D7E83E004D30C9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				607EE61627D70C62006B4428 /* Assets.xcassets */,
+				607EE61227D70C5F006B4428 /* GratuityApp.swift */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		603A69C927D7E895004D30C9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				607EE61D27D70C62006B4428 /* Gratuity.xcdatamodeld */,
+				607EE61B27D70C62006B4428 /* Persistence.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		603A69CB27D7E8C4004D30C9 /* Gratuity Calculations */ = {
+			isa = PBXGroup;
+			children = (
+				607EE64827D71072006B4428 /* GratuityFactor.swift */,
+			);
+			path = "Gratuity Calculations";
+			sourceTree = "<group>";
+		};
+		603A69CC27D7E8D5004D30C9 /* Tip Button */ = {
+			isa = PBXGroup;
+			children = (
+				607EE64A27D715D5006B4428 /* TipButton.swift */,
+				603A69CD27D7E8ED004D30C9 /* TipPercentage.swift */,
+				603A69CF27D7EAEB004D30C9 /* TipButtonModel.swift */,
+			);
+			path = "Tip Button";
+			sourceTree = "<group>";
+		};
+		605BCF4627DEFAB900311B68 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				605BCF4727DEFAC400311B68 /* SettingsView.swift */,
+				60819EF127DFDB9500AEF5C1 /* ColorSchemePicker.swift */,
+				60819EF327DFDD1100AEF5C1 /* ColorElement.swift */,
+				60819EF527E043C900AEF5C1 /* Settings.swift */,
+				60C16BFF27E3B4980097A007 /* TipPercentagePicker.swift */,
+				60C16C0127E3BEB50097A007 /* UpdateTipPercentageView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		607EE60627D70C5F006B4428 = {
 			isa = PBXGroup;
 			children = (
@@ -98,11 +179,13 @@
 		607EE61127D70C5F006B4428 /* Gratuity */ = {
 			isa = PBXGroup;
 			children = (
-				607EE61227D70C5F006B4428 /* GratuityApp.swift */,
-				607EE61427D70C5F006B4428 /* ContentView.swift */,
-				607EE61627D70C62006B4428 /* Assets.xcassets */,
-				607EE61B27D70C62006B4428 /* Persistence.swift */,
-				607EE61D27D70C62006B4428 /* Gratuity.xcdatamodeld */,
+				60B4369A27DFCB12009540A6 /* Keyboard Managment */,
+				605BCF4627DEFAB900311B68 /* Settings */,
+				603A69CC27D7E8D5004D30C9 /* Tip Button */,
+				603A69CB27D7E8C4004D30C9 /* Gratuity Calculations */,
+				603A69C927D7E895004D30C9 /* CoreData */,
+				603A69C827D7E83E004D30C9 /* Support Files */,
+				607EE64727D70EE6006B4428 /* CalculationView */,
 				607EE61827D70C62006B4428 /* Preview Content */,
 			);
 			path = Gratuity;
@@ -131,6 +214,27 @@
 				607EE63427D70C62006B4428 /* GratuityUITestsLaunchTests.swift */,
 			);
 			path = GratuityUITests;
+			sourceTree = "<group>";
+		};
+		607EE64727D70EE6006B4428 /* CalculationView */ = {
+			isa = PBXGroup;
+			children = (
+				607EE64127D70CBF006B4428 /* CalculationView.swift */,
+				607EE64327D70DF2006B4428 /* CalculationViewModel.swift */,
+				6027D51927E2684B00273B7D /* IncrementButton.swift */,
+			);
+			path = CalculationView;
+			sourceTree = "<group>";
+		};
+		60B4369A27DFCB12009540A6 /* Keyboard Managment */ = {
+			isa = PBXGroup;
+			children = (
+				60B4369B27DFCB3C009540A6 /* KeyboardAvoidance.swift */,
+				60B4369D27DFCDDC009540A6 /* KeyboardAdaptive.swift */,
+				60B4369F27DFCEC2009540A6 /* EXT+UIResponder.swift */,
+				6027D51727E0FC8100273B7D /* EXT+View.swift */,
+			);
+			path = "Keyboard Managment";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,10 +367,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60819EF227DFDB9500AEF5C1 /* ColorSchemePicker.swift in Sources */,
+				6027D51827E0FC8100273B7D /* EXT+View.swift in Sources */,
+				607EE64427D70DF2006B4428 /* CalculationViewModel.swift in Sources */,
+				603A69CE27D7E8ED004D30C9 /* TipPercentage.swift in Sources */,
+				60819EF427DFDD1100AEF5C1 /* ColorElement.swift in Sources */,
 				607EE61C27D70C62006B4428 /* Persistence.swift in Sources */,
-				607EE61527D70C5F006B4428 /* ContentView.swift in Sources */,
+				60C16C0027E3B4980097A007 /* TipPercentagePicker.swift in Sources */,
+				603A69D027D7EAEB004D30C9 /* TipButtonModel.swift in Sources */,
 				607EE61F27D70C62006B4428 /* Gratuity.xcdatamodeld in Sources */,
+				607EE64227D70CBF006B4428 /* CalculationView.swift in Sources */,
 				607EE61327D70C5F006B4428 /* GratuityApp.swift in Sources */,
+				60B4369C27DFCB3C009540A6 /* KeyboardAvoidance.swift in Sources */,
+				60819EF627E043C900AEF5C1 /* Settings.swift in Sources */,
+				60C16C0227E3BEB50097A007 /* UpdateTipPercentageView.swift in Sources */,
+				60B436A027DFCEC2009540A6 /* EXT+UIResponder.swift in Sources */,
+				60B4369E27DFCDDC009540A6 /* KeyboardAdaptive.swift in Sources */,
+				607EE64927D71072006B4428 /* GratuityFactor.swift in Sources */,
+				607EE64B27D715D5006B4428 /* TipButton.swift in Sources */,
+				605BCF4827DEFAC400311B68 /* SettingsView.swift in Sources */,
+				6027D51A27E2684B00273B7D /* IncrementButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
