@@ -42,10 +42,12 @@ extension TipButton {
                 .frame(width: size.size,
                        height: size.size,
                        alignment: .center)
+                
             
             Text(percentage.asString)
                 .font(size == .large ? .title : font)
                 .font(size == .small ? .headline : font)
+                
         }
     }
     
@@ -64,7 +66,7 @@ extension TipButton {
         var size: CGFloat {
             switch self {
             case .small:
-                return UIScreen.main.bounds.width / 4 - 50
+                return UIScreen.main.bounds.width / 4 - 30
 //            case .medium:
 //                <#code#>
             case .large:

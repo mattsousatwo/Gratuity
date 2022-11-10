@@ -47,7 +47,7 @@ enum ColorElement: Int, CaseIterable {
         case .intergalactic:
             return "Intergalactic"
         case .nuetral:
-            return "Gray"
+            return "Nuetral"
         }
     }
     

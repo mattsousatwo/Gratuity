@@ -17,8 +17,6 @@ struct ColorSchemePicker: View {
         
         Section("Color Scheme") {
             
-
-            
             Picker(selection: $settings.colorScheme) {
                 ForEach(ColorElement.allCases, id: \.self) { color in
                     row(for: color)

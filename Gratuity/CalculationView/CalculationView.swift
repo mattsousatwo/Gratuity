@@ -6,8 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CalculationView: View {
+    
+    
+    // Fetching For a list of items sorted by their timestamps 
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+                  animation: .default)
+    private var items: FetchedResults<Item>
     
     @ObservedObject private var calculationModel = CalculationViewModel()
     
