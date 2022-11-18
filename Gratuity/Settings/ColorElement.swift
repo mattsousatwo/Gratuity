@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum ColorElement: Int, CaseIterable {
+enum ColorElement: Int, CaseIterable, Codable {
     
     case papaya, mar, ooze, summer, blazing, intergalactic, nuetral
     

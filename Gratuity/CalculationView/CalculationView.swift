@@ -11,10 +11,13 @@ import CoreData
 struct CalculationView: View {
     
     
-    // Fetching For a list of items sorted by their timestamps 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-                  animation: .default)
-    private var items: FetchedResults<Item>
+    // Fetching For a list of items sorted by their timestamps
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Default.uuid,
+                                                    ascending: true)],
+                                                    animation: .default)
+    private var defaults: FetchedResults<Default>
+    
+    
     
     @ObservedObject private var calculationModel = CalculationViewModel()
     
@@ -24,8 +27,6 @@ struct CalculationView: View {
                                       TipPercentage(0.20), TipPercentage(0.25)]
     
     var body: some View {
-        
-        
         
         VStack(alignment: .center) {
             
@@ -46,6 +47,8 @@ struct CalculationView: View {
         
         .onAppear {
             calculationModel.updateTotal()
+            settings.unwrapSettings(defaults.first)
+            
         }
         .onChange(of: calculationModel.priceValue) { newValue in
 //            calculationModel.priceString = calculationModel.convertToCurrency(newValue)

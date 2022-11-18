@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TipPercentage {
+class TipPercentage: Codable {
     
     private var id: String = UUID().uuidString
     var percentage: Double = 0.00
