@@ -47,6 +47,7 @@ struct CalculationView: View {
         
         .onAppear {
             calculationModel.updateTotal()
+            
             settings.unwrapSettings(defaults.first)
             
         }
