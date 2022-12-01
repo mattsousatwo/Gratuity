@@ -10,13 +10,13 @@ import CoreData
 
 struct CalculationView: View {
     
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     // Fetching For a list of items sorted by their timestamps
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Default.uuid,
                                                     ascending: true)],
                                                     animation: .default)
     private var defaults: FetchedResults<Default>
-    
     
     
     @ObservedObject private var calculationModel = CalculationViewModel()
@@ -43,13 +43,15 @@ struct CalculationView: View {
         .onTapGesture {
             self.hideKeyboard()
             calculationModel.updateTotal()
+            print("\n - The amount of fetched Settings = \(defaults.count) - \n default : \(defaults.first?.settings ?? "nil") ")
+            
         }
         
         .onAppear {
             calculationModel.updateTotal()
-            
-            settings.unwrapSettings(defaults.first)
-            
+            settings.initalizeSettings(in: managedObjectContext,
+                                       defaults)
+
         }
         .onChange(of: calculationModel.priceValue) { newValue in
 //            calculationModel.priceString = calculationModel.convertToCurrency(newValue)

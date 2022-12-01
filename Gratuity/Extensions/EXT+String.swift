@@ -10,7 +10,7 @@ import Foundation
 extension String {
     
     /// Decode a String to Setting
-    func convertToSetting() -> SettingConfiguation? {
+    func convertToSettingConfiguration() -> SettingConfiguation? {
         let decoder = JSONDecoder()
         guard let data = self.data(using: .utf8) else { return nil }
         guard let setting = try? decoder.decode(SettingConfiguation.self, from: data) else { return nil }
