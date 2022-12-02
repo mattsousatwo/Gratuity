@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TipButton: View {
     
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsController
     
     private let buttonModel = TipButtonModel()
     
@@ -25,7 +25,7 @@ struct TipButton: View {
 struct TipButton_Previews: PreviewProvider {
     static var previews: some View {
         TipButton(percentage: TipPercentage(0.12))
-            .environmentObject(Settings())
+            .environmentObject(SettingsController())
             .previewLayout(.sizeThatFits)
     }
 }

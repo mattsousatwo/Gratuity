@@ -21,7 +21,7 @@ struct CalculationView: View {
     
     @ObservedObject private var calculationModel = CalculationViewModel()
     
-    @StateObject var settings = Settings()
+    @StateObject var settings = SettingsController()
     
     @State private var percentages = [TipPercentage(0.12), TipPercentage(0.15),
                                       TipPercentage(0.20), TipPercentage(0.25)]
@@ -49,8 +49,11 @@ struct CalculationView: View {
         
         .onAppear {
             calculationModel.updateTotal()
+            
             settings.initalizeSettings(in: managedObjectContext,
-                                       defaults)
+                                           defaults)
+            calculationModel.tipPercentage = settings.savedTipPercentage
+            calculationModel.updateTotal()
 
         }
         .onChange(of: calculationModel.priceValue) { newValue in
@@ -266,6 +269,11 @@ extension CalculationView {
                         self.hideKeyboard()
                         calculationModel.tipPercentage = percent
                         calculationModel.updateTotal()
+                        
+                        settings.update(defaults,
+                                        to: nil, 
+                                        to: percent,
+                                        in: managedObjectContext)
                     }
                     .environmentObject(settings)
             }

@@ -28,7 +28,7 @@
 		607EE64B27D715D5006B4428 /* TipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607EE64A27D715D5006B4428 /* TipButton.swift */; };
 		60819EF227DFDB9500AEF5C1 /* ColorSchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60819EF127DFDB9500AEF5C1 /* ColorSchemePicker.swift */; };
 		60819EF427DFDD1100AEF5C1 /* ColorElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60819EF327DFDD1100AEF5C1 /* ColorElement.swift */; };
-		60819EF627E043C900AEF5C1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60819EF527E043C900AEF5C1 /* Settings.swift */; };
+		60819EF627E043C900AEF5C1 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60819EF527E043C900AEF5C1 /* SettingsController.swift */; };
 		60B4369C27DFCB3C009540A6 /* KeyboardAvoidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4369B27DFCB3C009540A6 /* KeyboardAvoidance.swift */; };
 		60B4369E27DFCDDC009540A6 /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4369D27DFCDDC009540A6 /* KeyboardAdaptive.swift */; };
 		60B436A027DFCEC2009540A6 /* EXT+UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B4369F27DFCEC2009540A6 /* EXT+UIResponder.swift */; };
@@ -78,7 +78,7 @@
 		607EE64A27D715D5006B4428 /* TipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipButton.swift; sourceTree = "<group>"; };
 		60819EF127DFDB9500AEF5C1 /* ColorSchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemePicker.swift; sourceTree = "<group>"; };
 		60819EF327DFDD1100AEF5C1 /* ColorElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorElement.swift; sourceTree = "<group>"; };
-		60819EF527E043C900AEF5C1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		60819EF527E043C900AEF5C1 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		60B4369B27DFCB3C009540A6 /* KeyboardAvoidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAvoidance.swift; sourceTree = "<group>"; };
 		60B4369D27DFCDDC009540A6 /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		60B4369F27DFCEC2009540A6 /* EXT+UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EXT+UIResponder.swift"; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				605BCF4727DEFAC400311B68 /* SettingsView.swift */,
 				60819EF127DFDB9500AEF5C1 /* ColorSchemePicker.swift */,
 				60819EF327DFDD1100AEF5C1 /* ColorElement.swift */,
-				60819EF527E043C900AEF5C1 /* Settings.swift */,
+				60819EF527E043C900AEF5C1 /* SettingsController.swift */,
 				60C16BFF27E3B4980097A007 /* TipPercentagePicker.swift */,
 				60C16C0127E3BEB50097A007 /* UpdateTipPercentageView.swift */,
 				601BEF502934516D00938982 /* SettingConfiguration.swift */,
@@ -395,7 +395,7 @@
 				601BEF512934516D00938982 /* SettingConfiguration.swift in Sources */,
 				607EE61327D70C5F006B4428 /* GratuityApp.swift in Sources */,
 				60B4369C27DFCB3C009540A6 /* KeyboardAvoidance.swift in Sources */,
-				60819EF627E043C900AEF5C1 /* Settings.swift in Sources */,
+				60819EF627E043C900AEF5C1 /* SettingsController.swift in Sources */,
 				60C16C0227E3BEB50097A007 /* UpdateTipPercentageView.swift in Sources */,
 				60B436A027DFCEC2009540A6 /* EXT+UIResponder.swift in Sources */,
 				60B4369E27DFCDDC009540A6 /* KeyboardAdaptive.swift in Sources */,

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UpdateTipPercentageView: View {
     
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsController
     @State private var st: String = ""
     
     var body: some View {

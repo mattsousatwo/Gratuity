@@ -10,7 +10,7 @@ import SwiftUI
 /// Button to increment to decrement the value of numberOfPeople or tipValue
 struct IncrementButton: View {
     
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsController
     var type: IncrementType
     var imageTag = ""
     

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsController
     
     @State private var selection = TipPercentage(0.3)
 //    @State private var options = [TipPercentage(0.3), TipPercentage(0.7),
@@ -38,6 +38,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView( options: .constant([TipPercentage(0.3), TipPercentage(0.7),
-                                          TipPercentage(0.10), TipPercentage(0.4)])).environmentObject(Settings())
+                                          TipPercentage(0.10), TipPercentage(0.4)])).environmentObject(SettingsController())
     }
 }

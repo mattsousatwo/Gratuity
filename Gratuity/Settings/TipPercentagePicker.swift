@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TipPercentagePicker: View {
     
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsController
     @Binding var selection: TipPercentage
     @Binding var options: [TipPercentage]
     

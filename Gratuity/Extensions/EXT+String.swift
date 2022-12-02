@@ -14,7 +14,7 @@ extension String {
         let decoder = JSONDecoder()
         guard let data = self.data(using: .utf8) else { return nil }
         guard let setting = try? decoder.decode(SettingConfiguation.self, from: data) else { return nil }
-        print("Convert String to Setting Success")
+        print("\nConvert String to Setting Success\n")
         return setting
     }
 }

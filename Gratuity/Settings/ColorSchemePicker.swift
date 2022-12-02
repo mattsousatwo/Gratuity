@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorSchemePicker: View {
     
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var settings: SettingsController
     
     @State private var selection = 0
     
