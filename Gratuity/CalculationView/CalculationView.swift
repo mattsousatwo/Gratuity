@@ -13,10 +13,10 @@ struct CalculationView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     // Fetching For a list of items sorted by their timestamps
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Default.uuid,
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Configuration.uuid,
                                                     ascending: true)],
                                                     animation: .default)
-    private var defaults: FetchedResults<Default>
+    private var defaults: FetchedResults<Configuration>
     
     
     @ObservedObject private var calculationModel = CalculationViewModel()
@@ -62,6 +62,11 @@ struct CalculationView: View {
 //            calculationModel.priceString = calculationModel.convertToCurrency(newValue)
             //            totalPriceString = calculationModel.convertToCurrency(newValue)
         }
+        .onChange(of: defaults.count, perform: { newValue in
+            percentages = settings.tipOptions
+            calculationModel.numberOfPeople = settings.personCount
+            calculationModel.tipPercentage = settings.savedTipPercentage
+        })
         .navigationTitle(Text("Gratuity"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

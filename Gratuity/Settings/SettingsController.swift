@@ -29,7 +29,7 @@ class SettingsController: ObservableObject {
 extension SettingsController {
     
     /// Unwrap saved settings from Default element
-    func loadSettingConfiguration(_ defaultSettings: FetchedResults<Default>)  {
+    func loadSettingConfiguration(_ defaultSettings: FetchedResults<Configuration>)  {
         guard let savedSettings = defaultSettings.first else { return }
         guard let configuration = savedSettings.settings?.convertToSettingConfiguration() else { return }
         
@@ -48,7 +48,7 @@ extension SettingsController {
     
     /// Will create settings for user if settings have not been initalized
     func initalizeSettings(in context: NSManagedObjectContext,
-                           _ defaults: FetchedResults<Default>) {
+                           _ defaults: FetchedResults<Configuration>) {
         print("The amount of settings saved/fetched == \(defaults.count)")
         switch defaults.count {
         case 0:
@@ -77,7 +77,7 @@ extension SettingsController {
                           _ configuration: SettingConfiguation? = nil) {
         
 //        let context = result.container.viewContext
-        let newElement = Default(context: context)
+        let newElement = Configuration(context: context)
         newElement.uuid = UUID().uuidString
         
         
@@ -100,7 +100,7 @@ extension SettingsController {
     }
     
     /// Update Setting color or tip
-    func update(_ fetchedResults: FetchedResults<Default>,
+    func update(_ fetchedResults: FetchedResults<Configuration>,
                 to color: ColorElement? = nil,
                 tip tipUpdate: TipPercentage? = nil,
                 tipOptions: [TipPercentage]? = nil,
@@ -139,7 +139,7 @@ extension SettingsController {
     
     /// Delete All elements
     func deleteAllSettingConfigurations(in context: NSManagedObjectContext) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Default")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Configuration")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
         do {
             try context.execute(deleteRequest)
@@ -150,8 +150,8 @@ extension SettingsController {
     }
     
     /// Delete a specific configuration
-    func delete(configuration: Default, in context: NSManagedObjectContext) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Default")
+    func delete(configuration: Configuration, in context: NSManagedObjectContext) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Configuration")
         request.predicate = NSPredicate(format: "uuid == %@", configuration.uuid ?? "")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
         do {

@@ -14,7 +14,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Default(context: viewContext)
+            let newItem = Configuration(context: viewContext)
             newItem.uuid = "Preview Item"
             newItem.settings = "Preview Item Settings"
         }
