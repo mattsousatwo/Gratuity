@@ -8,21 +8,35 @@
 import Foundation
 
 /// Saved data packet containing the users configuation of the color scheme and last used tip percentage
-class SettingConfiguation: Codable {
+class SettingConfiguation: Codable, CustomDebugStringConvertible {
     /// ColorScheme used in the application
     var colorScheme: ColorElement
     /// Last used tip by the user
     var lastUsedTip: TipPercentage
+    /// Saved Tips
+    var tipOptions: [TipPercentage]
+    /// The number of people
+    var personCount: Int
     /// UUID for the object
     var uuid: String
+    
+    var debugDescription: String {
+        return "\n ConfigurationID - \(uuid) \n Color: \(colorScheme.title) \n lastUsedTip: \(lastUsedTip) \n options: \(tipOptions) "
+    }
     
     /// Used to encode Setting into JSON
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     
-    init(scheme: ColorElement, tip: TipPercentage, uuid: String? = nil) {
+    init(scheme: ColorElement,
+         tip: TipPercentage,
+         options: [TipPercentage],
+         personCount: Int,
+         uuid: String? = nil) {
         self.colorScheme = scheme
         self.lastUsedTip = tip
+        self.tipOptions = options
+        self.personCount = personCount
         if uuid == nil {
             self.uuid = UUID().uuidString
         } else {
@@ -35,6 +49,8 @@ class SettingConfiguation: Codable {
     enum CodingKeys: String, CodingKey {
         case colorScheme = "colorScheme"
         case lastUsedTip = "lastUsedTip"
+        case tipOptions = "tipOptions"
+        case personCount = "personCount"
         case uuid = "uuid"
     }
     
@@ -43,6 +59,8 @@ class SettingConfiguation: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         colorScheme = try container.decode(ColorElement.self, forKey: .colorScheme)
         lastUsedTip = try container.decode(TipPercentage.self, forKey: .lastUsedTip)
+        tipOptions = try container.decode([TipPercentage].self, forKey: .tipOptions)
+        personCount = try container.decode(Int.self, forKey: .personCount)
         uuid = try container.decode(String.self, forKey: .uuid)
     }
 
@@ -51,6 +69,8 @@ class SettingConfiguation: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(colorScheme, forKey: .colorScheme)
         try container.encode(lastUsedTip, forKey: .lastUsedTip)
+        try container.encode(tipOptions, forKey: .tipOptions)
+        try container.encode(personCount, forKey: .personCount)
         try container.encode(uuid, forKey: .uuid)
     }
     

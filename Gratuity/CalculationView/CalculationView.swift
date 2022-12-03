@@ -49,11 +49,13 @@ struct CalculationView: View {
         
         .onAppear {
             calculationModel.updateTotal()
-            
+//            settings.deleteAllSettingConfigurations(in: managedObjectContext)
             settings.initalizeSettings(in: managedObjectContext,
                                            defaults)
+            // updating tip percentage to saved tip percentage
             calculationModel.tipPercentage = settings.savedTipPercentage
             calculationModel.updateTotal()
+            percentages = settings.tipOptions
 
         }
         .onChange(of: calculationModel.priceValue) { newValue in
@@ -271,8 +273,7 @@ extension CalculationView {
                         calculationModel.updateTotal()
                         
                         settings.update(defaults,
-                                        to: nil, 
-                                        to: percent,
+                                        tip: percent,
                                         in: managedObjectContext)
                     }
                     .environmentObject(settings)

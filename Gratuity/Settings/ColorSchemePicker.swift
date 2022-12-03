@@ -44,9 +44,10 @@ struct ColorSchemePicker: View {
             
             
         }.padding()
-//            .onTapGesture {
-//                settings.colorScheme = color
-//            }
+            .onTapGesture {
+                settings.colorScheme = color
+           
+            }
     }
     
 }

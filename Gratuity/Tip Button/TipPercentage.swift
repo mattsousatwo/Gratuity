@@ -7,11 +7,15 @@
 
 import Foundation
 
-class TipPercentage: Codable {
+class TipPercentage: Codable, CustomDebugStringConvertible {
     
     private var id: String = UUID().uuidString
     var percentage: Double = 0.00
     var asString: String = ""
+    
+    var debugDescription: String {
+        return asString
+    }
     
     init(_ value: Double) {
         self.percentage = value

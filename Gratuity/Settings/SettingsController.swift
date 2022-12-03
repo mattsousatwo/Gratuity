@@ -17,7 +17,11 @@ class SettingsController: ObservableObject {
     /// Last used tip percentage
     @Published var savedTipPercentage: TipPercentage = TipPercentage(0.15)
     
-    let result = PersistenceController(inMemory: true)
+    @Published var tipOptions: [TipPercentage] = []
+    
+    @Published var personCount: Int = 1
+    
+//    private let result = PersistenceController(inMemory: true)
     
 }
 
@@ -26,13 +30,14 @@ extension SettingsController {
     
     /// Unwrap saved settings from Default element
     func loadSettingConfiguration(_ defaultSettings: FetchedResults<Default>)  {
-        print("\nLoadSettingConfiguration() ---- (\(defaultSettings.first?.settings ?? "NIL 1"))\n")
-        
         guard let savedSettings = defaultSettings.first else { return }
         guard let configuration = savedSettings.settings?.convertToSettingConfiguration() else { return }
         
+        print("\n ---- LoadSettingConfiguration() ---- \(configuration)\n")
         colorScheme = configuration.colorScheme
         savedTipPercentage = configuration.lastUsedTip
+        tipOptions = configuration.tipOptions
+        personCount = configuration.personCount
         /// Maybe need to set up saved tips as its own array, then load the values into the system
         /// currently there is only the last used percentage saved
         /// this was done on purpose yet might not be the best solution
@@ -49,7 +54,10 @@ extension SettingsController {
         case 0:
             createNewSetting(in: context,
                              SettingConfiguation(scheme: .intergalactic,
-                             tip: TipPercentage(0.12)) )
+                                                 tip: TipPercentage(0.12),
+                                                 options: [TipPercentage(0.05), TipPercentage(0.08),
+                                                           TipPercentage(0.10), TipPercentage(0.12)],
+                                                 personCount: 1) )
         case 1:
             loadSettingConfiguration(defaults)
         default:
@@ -70,11 +78,11 @@ extension SettingsController {
         
 //        let context = result.container.viewContext
         let newElement = Default(context: context)
-        
-        
         newElement.uuid = UUID().uuidString
         
         
+        // MARK: Need to update @Published values upon creation
+        // Need to set values if SettingConfig is not applied
         if let configuration = configuration,
             let configurationJSON = configuration.convertToJSON() {
                 newElement.settings = configurationJSON
@@ -94,7 +102,9 @@ extension SettingsController {
     /// Update Setting color or tip
     func update(_ fetchedResults: FetchedResults<Default>,
                 to color: ColorElement? = nil,
-                to tipUpdate: TipPercentage? = nil,
+                tip tipUpdate: TipPercentage? = nil,
+                tipOptions: [TipPercentage]? = nil,
+                personCount: Int? = nil,
                 in context: NSManagedObjectContext) {
         guard let savedSetting = fetchedResults.first else { return }
         guard let config = savedSetting.settings?.convertToSettingConfiguration() else { return }
@@ -127,20 +137,30 @@ extension SettingsController {
 
 extension SettingsController {
     
-    // Delete All elements
+    /// Delete All elements
     func deleteAllSettingConfigurations(in context: NSManagedObjectContext) {
-        print("NEED TO UPDATE ENTITY NAME - DELETEALLSETTINGS WILL NOT WORK")
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NAME")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Default")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
         do {
             try context.execute(deleteRequest)
         } catch {
             print(error)
         }
+        print("DeleteAll() ")
     }
     
-    
-    
+    /// Delete a specific configuration
+    func delete(configuration: Default, in context: NSManagedObjectContext) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Default")
+        request.predicate = NSPredicate(format: "uuid == %@", configuration.uuid ?? "")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try context.execute(deleteRequest)
+        } catch {
+            print(error)
+        }
+
+    }
     
     
     
