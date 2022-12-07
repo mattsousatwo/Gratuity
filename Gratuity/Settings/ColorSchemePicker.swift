@@ -9,9 +9,8 @@ import SwiftUI
 
 struct ColorSchemePicker: View {
     
-    @EnvironmentObject var settings: SettingsController
     
-    @State private var selection = 0
+    @EnvironmentObject var settings: SettingsController
     
     var body: some View {
         
@@ -23,6 +22,9 @@ struct ColorSchemePicker: View {
                 }
             } label: {
                 Text("Selection")
+            }
+            .onChange(of: settings.colorScheme) { newColor in
+
             }
             
 
@@ -44,10 +46,6 @@ struct ColorSchemePicker: View {
             
             
         }.padding()
-            .onTapGesture {
-                settings.colorScheme = color
-           
-            }
     }
     
 }

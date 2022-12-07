@@ -8,7 +8,7 @@
 import Foundation
 
 /// Saved data packet containing the users configuation of the color scheme and last used tip percentage
-class SettingConfiguation: Codable, CustomDebugStringConvertible {
+class SettingConfiguration: Codable, CustomDebugStringConvertible {
     /// ColorScheme used in the application
     var colorScheme: ColorElement
     /// Last used tip by the user
@@ -21,7 +21,7 @@ class SettingConfiguation: Codable, CustomDebugStringConvertible {
     var uuid: String
     
     var debugDescription: String {
-        return "\n ConfigurationID - \(uuid) \n Color: \(colorScheme.title) \n lastUsedTip: \(lastUsedTip) \n options: \(tipOptions) "
+        return "\n ConfigurationID - \(uuid) \n Color: \(colorScheme.title) \n lastUsedTip: \(lastUsedTip) \n options: \(tipOptions) \n personCount - \(personCount)"
     }
     
     /// Used to encode Setting into JSON
@@ -76,7 +76,7 @@ class SettingConfiguation: Codable, CustomDebugStringConvertible {
     
 }
 
-extension SettingConfiguation {
+extension SettingConfiguration {
     
     /// Update colorScheme or lastUsedTip
     func update(scheme: ColorElement? = nil, tip: TipPercentage? = nil) {

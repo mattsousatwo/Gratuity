@@ -12,6 +12,11 @@ import CoreData
 /// Class overseeing the users prefrences
 class SettingsController: ObservableObject {
     
+    /// Primary Settings configuration array
+    @Published var fetchedConfig: FetchedResults<Configuration>?
+    /// Current configuration being used
+    @Published var configuration: SettingConfiguration?
+    
     /// Desired color scheme for application
     @Published var colorScheme: ColorElement = .ooze
     /// Last used tip percentage
@@ -21,74 +26,110 @@ class SettingsController: ObservableObject {
     
     @Published var personCount: Int = 1
     
-//    private let result = PersistenceController(inMemory: true)
+    let persictenceController  = PersistenceController.shared
     
+    
+    /// Default configuration used if no values are stored
+    private let defaultConfig = SettingConfiguration(scheme: .mar,
+                                                     tip: TipPercentage(0.12),
+                                                     options: [TipPercentage(0.05), TipPercentage(0.08),          TipPercentage(0.10), TipPercentage(0.12)],
+                                                     personCount: 1)
 }
 
 
 extension SettingsController {
     
-    /// Unwrap saved settings from Default element
-    func loadSettingConfiguration(_ defaultSettings: FetchedResults<Configuration>)  {
-        guard let savedSettings = defaultSettings.first else { return }
-        guard let configuration = savedSettings.settings?.convertToSettingConfiguration() else { return }
-        
-        print("\n ---- LoadSettingConfiguration() ---- \(configuration)\n")
-        colorScheme = configuration.colorScheme
-        savedTipPercentage = configuration.lastUsedTip
-        tipOptions = configuration.tipOptions
-        personCount = configuration.personCount
-        /// Maybe need to set up saved tips as its own array, then load the values into the system
-        /// currently there is only the last used percentage saved
-        /// this was done on purpose yet might not be the best solution
-        
-        
+    /// Unwrap the saved configuration value ----- UNUSED ------
+//    func unwrapConfiguration()  {
+//        guard let configuration = fetchedConfig else { return  }
+//        guard let savedSettings = configuration.first else { return }
+//        print("Core Data Configuration ID \(savedSettings.uuid ?? "nil" )")
+//        guard let savedConfig = savedSettings.settings?.convertToSettingConfiguration() else { return }
+//        self.configuration = savedConfig
+//    }
+    
+    
+    /// Unwrap the saved configuration value
+    func unwrap(config: FetchedResults<Configuration>?) -> SettingConfiguration? {
+        guard let configuration = fetchedConfig else { return defaultConfig }
+        guard let savedSettings = configuration.first else { return defaultConfig }
+        print("Core Data Configuration ID \(savedSettings.uuid ?? "nil" )")
+        guard let savedConfig = savedSettings.settings?.convertToSettingConfiguration() else { return defaultConfig }
+        self.configuration = savedConfig
+        return savedConfig
+    }
+
+    
+    /// Load saved settings from fetched Configurations - if none are fetched, create new configuration
+    func loadSettings(_ configuration: SettingConfiguration? = nil)  {
+        if let configuration = configuration {
+            self.configuration = configuration
+            assignConfigurationValues(to: configuration)
+            print("\nLoad saved configuration \n --- \n\(configuration) \n --- \n")
+        } else {
+            guard let fetchedConfiguration = configuration else {
+                assignConfigurationValues(to: defaultConfig)
+                print("\nLoad saved configuration \n --- \n\(defaultConfig) \n --- \n")
+                return
+            }
+            assignConfigurationValues(to: fetchedConfiguration)
+            print("\nLoad saved configuration \n --- \n\(fetchedConfiguration) \n --- \n")
+        }
+    }
+    
+    /// Use to update SettingsControllers values - colorScheme, savedTipPercentage, tipOptions, personCount
+    func assignConfigurationValues(to config: SettingConfiguration) {
+        colorScheme = config.colorScheme
+        savedTipPercentage = config.lastUsedTip
+        tipOptions = config.tipOptions
+        personCount = config.personCount
     }
     
     
     /// Will create settings for user if settings have not been initalized
-    func initalizeSettings(in context: NSManagedObjectContext,
-                           _ defaults: FetchedResults<Configuration>) {
-        print("The amount of settings saved/fetched == \(defaults.count)")
-        switch defaults.count {
-        case 0:
-            createNewSetting(in: context,
-                             SettingConfiguation(scheme: .intergalactic,
-                                                 tip: TipPercentage(0.12),
-                                                 options: [TipPercentage(0.05), TipPercentage(0.08),
-                                                           TipPercentage(0.10), TipPercentage(0.12)],
-                                                 personCount: 1) )
-        case 1:
-            loadSettingConfiguration(defaults)
-        default:
-            
-            /// if more than 1 {
-            ///     keep most recent
-            ///     delete remainder
-            /// }
-            
-            
-            break
+    func initalizeSettings(in context: NSManagedObjectContext) {
+        if let fetchedConfig = fetchedConfig {
+            print("The amount of settings saved/fetched == \(fetchedConfig.count)")
+            switch fetchedConfig.count {
+            case 0:
+                createNewSetting(in: context)
+            case 1:
+                
+                let savedConfig = unwrap(config: fetchedConfig)
+                loadSettings(savedConfig)
+    
+            default:
+                
+                /// if more than 1 {
+                ///     keep most recent
+                ///     delete remainder
+                /// }
+                
+                
+                break
+            }
+        } else {
+            createNewSetting(in: context)
         }
     }
     
     /// Create a new setting
     func createNewSetting(in context: NSManagedObjectContext,
-                          _ configuration: SettingConfiguation? = nil) {
+                          _ configuration: SettingConfiguration? = nil) {
         
 //        let context = result.container.viewContext
         let newElement = Configuration(context: context)
         newElement.uuid = UUID().uuidString
         
-        
-        // MARK: Need to update @Published values upon creation
-        // Need to set values if SettingConfig is not applied
         if let configuration = configuration,
             let configurationJSON = configuration.convertToJSON() {
+                loadSettings(configuration)
                 newElement.settings = configurationJSON
-                print("Successful Conversion of Configuration - \(configurationJSON)")
         } else {
-            newElement.settings = "New Settings"
+            
+            guard let defaultConfigurationJSON = defaultConfig.convertToJSON() else { return }
+            loadSettings(defaultConfig)
+            newElement.settings = defaultConfigurationJSON
         }
         
         do {
@@ -100,41 +141,49 @@ extension SettingsController {
     }
     
     /// Update Setting color or tip
-    func update(_ fetchedResults: FetchedResults<Configuration>,
-                to color: ColorElement? = nil,
-                tip tipUpdate: TipPercentage? = nil,
-                tipOptions: [TipPercentage]? = nil,
-                personCount: Int? = nil,
-                in context: NSManagedObjectContext) {
-        guard let savedSetting = fetchedResults.first else { return }
-        guard let config = savedSetting.settings?.convertToSettingConfiguration() else { return }
+    func updateConfiguration(to color: ColorElement? = nil,
+                             tip tipUpdate: TipPercentage? = nil,
+                             tipOptions: [TipPercentage]? = nil,
+                             personCount: Int? = nil,
+                             in context: NSManagedObjectContext) {
+        guard let config = configuration else { return }
         
         if let color = color {
             config.colorScheme = color
-            print("Updating to \(color.title)")
+            print("Updating to - color: \(color.title)")
         }
         if let tipUpdate = tipUpdate {
             config.lastUsedTip = tipUpdate
-            print("Updating to \(tipUpdate.asString)")
+            print("Updating to - tip: \(tipUpdate.asString)")
         }
         
-        guard let updatedConfiguration = config.convertToJSON() else { return }
-        savedSetting.settings = updatedConfiguration
+        if let tipOptions = tipOptions {
+            config.tipOptions = tipOptions
+            print("Updating to - tipOptions \(tipOptions)")
+        }
+        
+        if let personCount = personCount {
+            config.personCount = personCount
+            print("Updating to - personCount: \(personCount)")
+        }
+        
+        configuration = config
+        assignConfigurationValues(to: config)
         
         do {
             try context.save()
-            print("Saving update of \(savedSetting.uuid ?? "nil") ")
+            print("Saving update of \(config.uuid) ")
         } catch {
             print("Failed to update Setting - UUID: \(config.uuid)")
         }
         
         
-        print("Updated setting - \(savedSetting.settings ?? "nil")")
+        print("Updated setting - \(config)")
     }
     
 }
 
-
+// Delete
 extension SettingsController {
     
     /// Delete All elements

@@ -100,19 +100,21 @@ class CalculationViewModel: ObservableObject {
     }
     
     /// Subtract the value of numberOfPeople if more than 1
-    func subtractNumberOfPeople(_ value: Int = 1) {
+    func subtractNumberOfPeople(_ value: Int = 1) -> Int {
         if numberOfPeople > 1 {
             numberOfPeople -= value
             updateTotal()
         }
+        return numberOfPeople
     }
     
     /// Add one to the value of numberOfPeople if less than 50
-    func addOntoNumberOfPeople(_ value: Int = 1) {
+    func addOntoNumberOfPeople(_ value: Int = 1) -> Int {
         if numberOfPeople < 50 {
             numberOfPeople += value
             updateTotal()
         }
+        return numberOfPeople
     }
     
     /// Subtract the tip percentage by one if more than 1%

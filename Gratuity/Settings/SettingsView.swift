@@ -14,7 +14,6 @@ struct SettingsView: View {
     @State private var selection = TipPercentage(0.3)
 //    @State private var options = [TipPercentage(0.3), TipPercentage(0.7),
 //                                  TipPercentage(0.10), TipPercentage(0.4)]
-    @Binding var options: [TipPercentage]
     
     
     var body: some View {
@@ -23,9 +22,11 @@ struct SettingsView: View {
             Form {
                 
                 ColorSchemePicker()
+                    .environment(\.managedObjectContext,
+                                  settings.persictenceController.container.viewContext)
                     
                 TipPercentagePicker(selection: $selection,
-                                    options: $options)
+                                    options: $settings.tipOptions)
             }
             .environmentObject(settings)
             Text("Thank you for using Gratuity")
@@ -37,7 +38,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView( options: .constant([TipPercentage(0.3), TipPercentage(0.7),
-                                          TipPercentage(0.10), TipPercentage(0.4)])).environmentObject(SettingsController())
+        SettingsView( ).environmentObject(SettingsController())
     }
 }

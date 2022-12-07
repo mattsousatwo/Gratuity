@@ -16,16 +16,13 @@ struct CalculationView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Configuration.uuid,
                                                     ascending: true)],
                                                     animation: .default)
-    private var defaults: FetchedResults<Configuration>
+    private var configuration: FetchedResults<Configuration>
     
     
     @ObservedObject private var calculationModel = CalculationViewModel()
     
     @StateObject var settings = SettingsController()
-    
-    @State private var percentages = [TipPercentage(0.12), TipPercentage(0.15),
-                                      TipPercentage(0.20), TipPercentage(0.25)]
-    
+
     var body: some View {
         
         VStack(alignment: .center) {
@@ -43,28 +40,38 @@ struct CalculationView: View {
         .onTapGesture {
             self.hideKeyboard()
             calculationModel.updateTotal()
-            print("\n - The amount of fetched Settings = \(defaults.count) - \n default : \(defaults.first?.settings ?? "nil") ")
+            print("\n - The amount of fetched Settings = \(configuration.count) - \n default : \(configuration.first?.settings ?? "nil") ")
             
         }
         
         .onAppear {
-            calculationModel.updateTotal()
+
 //            settings.deleteAllSettingConfigurations(in: managedObjectContext)
-            settings.initalizeSettings(in: managedObjectContext,
-                                           defaults)
+            settings.fetchedConfig = configuration
+//
+//            settings.updateConfiguration(to: .ooze,
+//                                         in: managedObjectContext)
+//
+            
+//            if let unwrappedConfig = settings.unwrap(config: configuration) {
+//                settings.configuration = unwrappedConfig
+//            }
+//            
+            
+            
+            settings.initalizeSettings(in: managedObjectContext)
             // updating tip percentage to saved tip percentage
             calculationModel.tipPercentage = settings.savedTipPercentage
             calculationModel.updateTotal()
-            percentages = settings.tipOptions
 
         }
         .onChange(of: calculationModel.priceValue) { newValue in
 //            calculationModel.priceString = calculationModel.convertToCurrency(newValue)
             //            totalPriceString = calculationModel.convertToCurrency(newValue)
         }
-        .onChange(of: defaults.count, perform: { newValue in
-            percentages = settings.tipOptions
-            calculationModel.numberOfPeople = settings.personCount
+        .onChange(of: configuration.count, perform: { newValue in
+
+            
             calculationModel.tipPercentage = settings.savedTipPercentage
         })
         .navigationTitle(Text("Gratuity"))
@@ -72,7 +79,7 @@ struct CalculationView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    SettingsView(options: $percentages)
+                    SettingsView()
                         .environmentObject(settings)
                 } label: {
                     Image(systemName: "line.3.horizontal")
@@ -239,18 +246,22 @@ extension CalculationView {
             Text("People")
             HStack {
                 IncrementButton(.peopleMinus) {
-                    calculationModel.subtractNumberOfPeople()
+                    
+                    
+                    settings.updateConfiguration(personCount: calculationModel.subtractNumberOfPeople(),
+                                                 in: managedObjectContext)
                 }
 //                incrementButton(.minus)
                 
-                Text("\(calculationModel.numberOfPeople)")
+                Text("\(settings.personCount)")
                     .frame(width: 35)
                     .font(.title)
                     .padding(.horizontal, 10)
                 
 //                incrementButton(.plus)
                 IncrementButton(.peoplePlus) {
-                    calculationModel.addOntoNumberOfPeople()
+                    settings.updateConfiguration(personCount: calculationModel.addOntoNumberOfPeople(),
+                                                 in: managedObjectContext)
                 }
             }.padding(5)
             
@@ -268,7 +279,7 @@ extension CalculationView {
         LazyVGrid(columns: calculationModel.percentageButtonColumnWidth,
                   alignment: .center,
                   spacing: 30) {
-            ForEach(percentages, id: \.self) { percent in
+            ForEach(settings.tipOptions, id: \.self) { percent in
                 TipButton(percentage: percent,
                           size: .large)
                     .contentShape(RoundedRectangle(cornerRadius: 12) )
@@ -277,9 +288,8 @@ extension CalculationView {
                         calculationModel.tipPercentage = percent
                         calculationModel.updateTotal()
                         
-                        settings.update(defaults,
-                                        tip: percent,
-                                        in: managedObjectContext)
+                        settings.updateConfiguration(tip: percent,
+                                                     in: managedObjectContext)
                     }
                     .environmentObject(settings)
             }
