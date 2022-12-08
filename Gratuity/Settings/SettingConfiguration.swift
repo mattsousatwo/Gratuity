@@ -92,6 +92,7 @@ extension SettingConfiguration {
     
     /// Convert Setting to JSON String in order to save to Coredata
     func convertToJSON() -> String? {
+        encoder.outputFormatting = .prettyPrinted
         guard let data = try? encoder.encode(self) else { return nil }
         return String(data: data, encoding: .utf8)
     }

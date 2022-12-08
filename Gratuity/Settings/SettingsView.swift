@@ -23,7 +23,7 @@ struct SettingsView: View {
                 
                 ColorSchemePicker()
                     .environment(\.managedObjectContext,
-                                  settings.persictenceController.container.viewContext)
+                                  settings.viewContext)
                     
                 TipPercentagePicker(selection: $selection,
                                     options: $settings.tipOptions)

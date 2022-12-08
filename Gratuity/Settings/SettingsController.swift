@@ -27,6 +27,7 @@ class SettingsController: ObservableObject {
     @Published var personCount: Int = 1
     
     let persictenceController  = PersistenceController.shared
+    let viewContext = PersistenceController.shared.container.viewContext
     
     
     /// Default configuration used if no values are stored
@@ -148,6 +149,7 @@ extension SettingsController {
                              in context: NSManagedObjectContext) {
         guard let config = configuration else { return }
         
+        
         if let color = color {
             config.colorScheme = color
             print("Updating to - color: \(color.title)")
@@ -170,8 +172,14 @@ extension SettingsController {
         configuration = config
         assignConfigurationValues(to: config)
         
+        
+        guard let fetchedSetting = fetchedConfig?.first else { return }
+        guard let configurationJSON = config.convertToJSON() else { return }
+        fetchedSetting.settings = configurationJSON
+        
+        
         do {
-            try context.save()
+            try viewContext.save()
             print("Saving update of \(config.uuid) ")
         } catch {
             print("Failed to update Setting - UUID: \(config.uuid)")

@@ -9,13 +9,14 @@ import SwiftUI
 
 @main
 struct GratuityApp: App {
-    let persistenceController = PersistenceController.shared
+//    let persistenceController = PersistenceController.shared
+    let settings = SettingsController()
 
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 CalculationView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)      
+                    .environment(\.managedObjectContext, settings.viewContext)
             }
         }
     }

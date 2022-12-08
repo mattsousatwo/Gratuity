@@ -24,7 +24,8 @@ struct ColorSchemePicker: View {
                 Text("Selection")
             }
             .onChange(of: settings.colorScheme) { newColor in
-
+                settings.updateConfiguration(to: newColor,
+                                             in: settings.viewContext)
             }
             
 

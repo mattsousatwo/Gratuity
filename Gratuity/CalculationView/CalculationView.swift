@@ -40,8 +40,6 @@ struct CalculationView: View {
         .onTapGesture {
             self.hideKeyboard()
             calculationModel.updateTotal()
-            print("\n - The amount of fetched Settings = \(configuration.count) - \n default : \(configuration.first?.settings ?? "nil") ")
-            
         }
         
         .onAppear {
@@ -260,6 +258,8 @@ extension CalculationView {
                 
 //                incrementButton(.plus)
                 IncrementButton(.peoplePlus) {
+                    
+    
                     settings.updateConfiguration(personCount: calculationModel.addOntoNumberOfPeople(),
                                                  in: managedObjectContext)
                 }
