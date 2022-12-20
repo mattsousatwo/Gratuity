@@ -249,14 +249,12 @@ extension CalculationView {
                     settings.updateConfiguration(personCount: calculationModel.subtractNumberOfPeople(),
                                                  in: managedObjectContext)
                 }
-//                incrementButton(.minus)
-                
+
                 Text("\(settings.personCount)")
                     .frame(width: 35)
                     .font(.title)
                     .padding(.horizontal, 10)
                 
-//                incrementButton(.plus)
                 IncrementButton(.peoplePlus) {
                     
     

@@ -21,11 +21,10 @@ struct TipPercentagePicker: View {
                 
                 // Go to view to set percentage && Save
                 NavigationLink {
-                    UpdateTipPercentageView()
+                    UpdateTipPercentageView(options: $options,
+                                            currentTipPercentage: options[i])
                         .environmentObject(settings)
                 } label: {
-                    
-                    
                     HStack {
                         Text("\(i + 1).")
                             .font(.headline)

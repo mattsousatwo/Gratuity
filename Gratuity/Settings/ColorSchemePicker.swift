@@ -15,7 +15,6 @@ struct ColorSchemePicker: View {
     var body: some View {
         
         Section("Color Scheme") {
-            
             Picker(selection: $settings.colorScheme) {
                 ForEach(ColorElement.allCases, id: \.self) { color in
                     row(for: color)
@@ -27,9 +26,6 @@ struct ColorSchemePicker: View {
                 settings.updateConfiguration(to: newColor,
                                              in: settings.viewContext)
             }
-            
-
-            
         }
     }
     

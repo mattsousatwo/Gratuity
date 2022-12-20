@@ -12,9 +12,6 @@ struct SettingsView: View {
     @EnvironmentObject var settings: SettingsController
     
     @State private var selection = TipPercentage(0.3)
-//    @State private var options = [TipPercentage(0.3), TipPercentage(0.7),
-//                                  TipPercentage(0.10), TipPercentage(0.4)]
-    
     
     var body: some View {
         
@@ -29,7 +26,7 @@ struct SettingsView: View {
                                     options: $settings.tipOptions)
             }
             .environmentObject(settings)
-            Text("Thank you for using Gratuity")
+            
         }.navigationTitle(Text("Settings"))
         
     }
